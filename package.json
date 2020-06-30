@@ -10,9 +10,11 @@
   "author": "Centanomics",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0"
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": "https://github.com/centanomics/Penny"
 }
