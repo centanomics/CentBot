@@ -1,7 +1,7 @@
 module.exports = {
   name: 'avatar',
   description: 'Gets your avatar',
-  execute(message, args) {
+  execute: (message, args) => {
     if (args.length === 0) {
       message.channel.send(
         message.author.displayAvatarURL({

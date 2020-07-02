@@ -1,20 +1,24 @@
 require('dotenv').config();
 const Discord = require('discord.js');
+const connectDB = require('./config/db');
 
 const client = new Discord.Client();
+
+connectDB();
 
 const prefix = '$';
 
 const fs = require('fs');
+const { connect } = require('http2');
 
 client.commands = new Discord.Collection();
 
 const commandFiles = fs
-  .readdirSync('./commands/message')
+  .readdirSync('./commands/')
   .filter((files) => files.endsWith('.js'));
 
 for (const file of commandFiles) {
-  const command = require(`./commands/message/${file}`);
+  const command = require(`./commands/${file}`);
 
   client.commands.set(command.name, command);
 }
@@ -28,11 +32,6 @@ client.on('message', (message) => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
-  // if (command === 'ping') {
-  //   client.commands.get('ping').execute(message, args);
-  // } else if (command === 'youtube') {
-  //   client.commands.get('youtube').execute(message, args);
-  // }
   client.commands.get(command).execute(message, args);
 });
 
