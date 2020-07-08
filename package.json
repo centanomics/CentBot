@@ -2,17 +2,19 @@
   "name": "centbot",
   "version": "1.0.0",
   "description": "Bot for my discord server",
-  "main": "main.js",
+  "main": "./src/bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon main.js"
+    "start": "node src/bot.js",
+    "dev": "nodemon src/bot.js"
   },
   "author": "Centanomics",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
-    "mongoose": "^5.9.21"
+    "mongoose": "^5.9.21",
+    "uuid": "^8.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

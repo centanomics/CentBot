@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uuidv4 = require('uuid').v4();
 
 const BetsSchema = mongoose.Schema({
   _id: {
@@ -8,7 +9,7 @@ const BetsSchema = mongoose.Schema({
   },
   order: {
     type: Number,
-    required: true,
+    required: false,
   },
   name: {
     type: String,
@@ -25,6 +26,10 @@ const BetsSchema = mongoose.Schema({
   correct: {
     type: Number,
     required: false,
+  },
+  userId: {
+    type: String,
+    required: true,
   },
 });
 
