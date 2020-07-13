@@ -1,22 +1,4 @@
 const Bets = require('../models/bets');
-let client;
-let user;
-
-const getBetOptions = (options) => {
-  client.on('message', (message) => {
-    if (message.author === user) {
-      if (message.content === 'done') {
-        return message.channel.send(' ');
-      } else if (message.content === 'cancel') {
-        return message.channel.send('Cancelled creation of bet.');
-      } else {
-        message.channel.send('added option');
-        options.push(message.content);
-      }
-    }
-    return;
-  });
-};
 
 const createBet = (message, args) => {
   console.log(args);
