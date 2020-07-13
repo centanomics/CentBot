@@ -10,9 +10,14 @@ module.exports = async (client, member) => {
     for (let i = 0; i < oldInvites.length; i++) {
       if (oldInvites[i].uses !== newInvites[i].uses) {
         code = oldInvites[i]._id;
-        await Invite.findByIdAndUpdate(newInvites[i]._id, {
-          uses: newInvites[i].uses,
-        });
+        const inviteFields = {};
+        inviteFields.uses = newInvites[i].uses;
+        // update record in database
+        await Invite.findByIdAndUpdate(
+          code,
+          { $set: inviteFields },
+          { new: true }
+        );
       }
     }
   } catch (err) {
