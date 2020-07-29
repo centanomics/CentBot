@@ -15,9 +15,6 @@ module.exports = {
       } else if (member) {
         try {
           await member.ban(reason);
-          channel.send(
-            `\`${user.tag}\` was banned because of \`${reason}\`\nUser Id: \`${user.id}\``
-          );
         } catch (error) {
           console.log(error);
           message.channel.send(error.message);
