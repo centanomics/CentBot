@@ -7,7 +7,6 @@ module.exports = {
     } else {
       const user = message.mentions.users.first();
       const member = message.mentions.members.first();
-      const channel = await message.client.channels.fetch('731129813095546982');
       const reason = args.slice(1).join(' ');
 
       if (message.author.equals(user)) {
