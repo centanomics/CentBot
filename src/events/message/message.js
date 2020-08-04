@@ -5,5 +5,9 @@ module.exports = (client, message) => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
-  client.commands.get(command).execute(message, args);
+  if (client.commands.get(command)) {
+    client.commands.get(command).execute(message, args);
+  } else {
+    message.channel.send(`${command} command does not exist`);
+  }
 };
