@@ -6,6 +6,7 @@ module.exports = {
       message.channel.send("You don't have permission to use this command");
     } else {
       const n = args[0];
+      await message.channel.bulkDelete(n);
       message.channel.send(`Purged ${n} message(s).`);
     }
   },
