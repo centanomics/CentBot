@@ -2,6 +2,7 @@ const Invite = require('../../models/invites');
 
 module.exports = async (client, member) => {
   const channel = await client.channels.fetch('731129813095546982');
+  const welcome = await client.channels.fetch('482722726373752832');
   const invitesArr = await member.guild.fetchInvites();
   const newInvites = Array.from(invitesArr.values());
   let code = '';
@@ -23,5 +24,8 @@ module.exports = async (client, member) => {
   } catch (err) {
     console.log(err.message);
   }
-  channel.send(`\`${member.user.tag}\` joined server with invite \`${code}\``);
+  channel.send(`\`@${member.user.tag}\` joined server with invite \`${code}\``);
+  welcome.send(
+    `<@${member.user.id}> has been added to the collection. Welcome!`
+  );
 };
