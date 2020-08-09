@@ -7,10 +7,6 @@ const BetsSchema = mongoose.Schema({
     default: uuidv4,
     required: true,
   },
-  order: {
-    type: Number,
-    required: false,
-  },
   name: {
     type: String,
     required: true,
