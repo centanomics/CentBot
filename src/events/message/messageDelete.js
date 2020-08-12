@@ -1,3 +1,1 @@
-module.exports = (client, message) => {
-  console.log('message deleted');
-};
+module.exports = (client, message) => {};
