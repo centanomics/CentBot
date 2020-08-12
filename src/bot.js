@@ -11,9 +11,11 @@ connectDB();
 const fs = require('fs').promises;
 const path = require('path');
 
+// creates a collection of commands and events
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
+// adds all commands to a collection
 (async function registerCommands(dir = 'commands') {
   // read directory file
   let files = await fs.readdir(path.join(__dirname, dir));
@@ -34,6 +36,7 @@ client.events = new Discord.Collection();
   }
 })();
 
+// adds all events to the collection
 (async function registerEvents(dir = 'events') {
   let files = await fs.readdir(path.join(__dirname, dir));
 
