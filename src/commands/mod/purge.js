@@ -5,9 +5,15 @@ module.exports = {
     if (!message.member.hasPermission('ADMINISTRATOR')) {
       message.channel.send("You don't have permission to use this command");
     } else {
-      const n = args[0];
-      await message.channel.bulkDelete(n);
-      message.channel.send(`Purged ${n} message(s).`);
+      try {
+        const n = args[0];
+        await message.channel.bulkDelete(n);
+        message.channel.send(`Purged ${n} message(s).`).then((message) => {
+          message.delete();
+        });
+      } catch (err) {
+        message.channel.send(err.message);
+      }
     }
   },
 };

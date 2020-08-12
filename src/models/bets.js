@@ -27,6 +27,10 @@ const BetsSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  messageId: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('bets', BetsSchema);
