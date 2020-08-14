@@ -1,3 +1,6 @@
+// @command     ban
+// @desc        bans a user
+// @access      moderators
 module.exports = {
   name: 'ban',
   description: 'bans a user',

@@ -1,3 +1,6 @@
+// @command     kick
+// @desc        kicks a user
+// @access      moderators
 module.exports = {
   name: 'kick',
   description: 'Kicks a user',

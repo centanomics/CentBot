@@ -1,3 +1,6 @@
+// @command     avatar
+// @desc        gets a users avatar or your own
+// @access      all
 module.exports = {
   name: 'avatar',
   description: 'Gets your avatar',

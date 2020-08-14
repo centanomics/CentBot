@@ -1,3 +1,6 @@
+// @command     unmute
+// @desc        unmutes a user
+// @access      moderators
 module.exports = {
   name: 'unmute',
   description: 'unmutes people',

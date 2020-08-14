@@ -1,3 +1,6 @@
+// @command     youtube
+// @desc        links my youtube channel
+// @access      all
 module.exports = {
   name: 'youtube',
   description: "sends Cent's youtube channel!",

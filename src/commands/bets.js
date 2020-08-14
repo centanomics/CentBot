@@ -149,6 +149,9 @@ const removeQuotes = (args) => {
   return args;
 };
 
+// @command     bets
+// @desc        create, close, and delete bets
+// @access      all
 module.exports = {
   name: 'bets',
   description: 'manage bets',

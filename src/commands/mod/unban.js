@@ -1,3 +1,6 @@
+// @command     unban
+// @desc        unbans a user
+// @access      moderators
 module.exports = {
   name: 'unban',
   description: 'revokes a users ban',

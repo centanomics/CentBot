@@ -1,3 +1,6 @@
+// @command     purge
+// @desc        removes a set amount of messages
+// @access      moderators
 module.exports = {
   name: 'purge',
   description: 'purges a number of messages, max 100',
