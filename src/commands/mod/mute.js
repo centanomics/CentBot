@@ -1,3 +1,5 @@
+const isAuthorized = require('../../utils/modAuth');
+
 // @command     mute
 // @desc        mutes a user
 // @access      moderators
@@ -5,9 +7,7 @@ module.exports = {
   name: 'mute',
   description: 'mutes people',
   execute: async (message, args) => {
-    if (!message.member.hasPermission('VIEW_AUDIT_LOG')) {
-      message.reply("You don't have permission to use this command!");
-    } else {
+    if (isAuthorized(message)) {
       const user = message.mentions.members.first();
       user.roles.add('601979552956416011');
     }

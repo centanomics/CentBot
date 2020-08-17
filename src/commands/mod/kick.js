@@ -1,3 +1,5 @@
+const isAuthorized = require('../../utils/modAuth');
+
 // @command     kick
 // @desc        kicks a user
 // @access      moderators
@@ -5,9 +7,7 @@ module.exports = {
   name: 'kick',
   description: 'Kicks a user',
   execute: async (message, args) => {
-    if (!message.member.hasPermission('KICK_MEMBERS')) {
-      message.channel.send("You don't have permission to use that command.");
-    } else {
+    if (isAuthorized(message)) {
       const user = message.mentions.users.first();
       const member = message.mentions.members.first();
       const reason = args.slice(1).join(' ');

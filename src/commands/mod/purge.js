@@ -1,3 +1,5 @@
+const isAuthorized = require('../../utils/modAuth');
+
 // @command     purge
 // @desc        removes a set amount of messages
 // @access      moderators
@@ -5,9 +7,7 @@ module.exports = {
   name: 'purge',
   description: 'purges a number of messages, max 100',
   execute: async (message, args) => {
-    if (!message.member.hasPermission('ADMINISTRATOR')) {
-      message.channel.send("You don't have permission to use this command");
-    } else {
+    if (isAuthorized(message)) {
       try {
         const n = args[0];
         await message.channel.bulkDelete(n);
