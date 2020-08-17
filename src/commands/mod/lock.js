@@ -9,10 +9,11 @@ module.exports = {
       message.reply("You don't have permission to use this command!");
     } else {
       let everyoneRole = message.guild.roles.everyone.id;
-      let overwrites = message.channel.permissionOverwrites.filter(
-        (overwrite) => overwrite.id === everyoneRole
-      );
-      console.log(overwrites.deny);
+      let overwrites = message.channel.permissionOverwrites
+        .get(everyoneRole)
+        .update({
+          SEND_MESSAGES: false,
+        });
 
       message.channel.send('Locked channel.');
     }
