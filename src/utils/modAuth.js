@@ -1,8 +1,10 @@
 const modAuth = {
   // checks if the user is a mod
-  isAuthorized: (message) => {
+  isAuthorized: (message, reply) => {
     if (!message.member.hasPermission('VIEW_AUDIT_LOG')) {
-      message.reply("You don't have permission to use this command!");
+      reply
+        ? message.reply("You don't have permission to use this command!")
+        : null;
       return false;
     } else {
       return true;

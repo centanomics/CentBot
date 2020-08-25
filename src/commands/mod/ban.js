@@ -8,7 +8,7 @@ module.exports = {
   description: 'bans a user',
   mod: true,
   execute: async (message, args) => {
-    if (isAuthorized(message)) {
+    if (isAuthorized(message, true)) {
       const user = message.mentions.users.first();
       const member = message.mentions.members.first();
       const reason = args.slice(1).join(' ');

@@ -8,7 +8,7 @@ module.exports = {
   description: 'mutes people',
   mod: true,
   execute: async (message, args) => {
-    if (isAuthorized(message)) {
+    if (isAuthorized(message, true)) {
       const user = message.mentions.members.first();
       user.roles.add('601979552956416011');
     }

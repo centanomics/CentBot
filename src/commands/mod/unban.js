@@ -8,7 +8,7 @@ module.exports = {
   description: 'revokes a users ban',
   mod: true,
   execute: async (message, args) => {
-    if (isAuthorized(message)) {
+    if (isAuthorized(message, true)) {
       await message.guild.members.unban(args[0]);
     }
   },

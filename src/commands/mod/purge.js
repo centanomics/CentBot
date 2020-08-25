@@ -8,7 +8,7 @@ module.exports = {
   description: 'purges a number of messages, max 100',
   mod: true,
   execute: async (message, args) => {
-    if (isAuthorized(message)) {
+    if (isAuthorized(message, true)) {
       try {
         const n = args[0];
         await message.channel.bulkDelete(n);

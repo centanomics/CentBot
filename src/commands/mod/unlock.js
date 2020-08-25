@@ -8,7 +8,7 @@ module.exports = {
   description: 'undo a readonly channel',
   mod: true,
   execute: (message, args) => {
-    if (isAuthorized(message)) {
+    if (isAuthorized(message, true)) {
       let everyoneRole = message.guild.roles.everyone.id;
       let overwrites = message.channel.permissionOverwrites
         .get(everyoneRole)

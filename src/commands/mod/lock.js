@@ -8,7 +8,7 @@ module.exports = {
   description: 'make a channel read only',
   mod: true,
   execute: async (message, args) => {
-    if (isAuthorized(message)) {
+    if (isAuthorized(message, true)) {
       let everyoneRole = message.guild.roles.everyone.id;
       let overwrites = message.channel.permissionOverwrites
         .get(everyoneRole)
