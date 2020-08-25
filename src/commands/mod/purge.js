@@ -1,4 +1,4 @@
-const isAuthorized = require('../../utils/modAuth');
+const { isAuthorized } = require('../../utils/modAuth');
 
 // @command     purge
 // @desc        removes a set amount of messages
@@ -6,6 +6,7 @@ const isAuthorized = require('../../utils/modAuth');
 module.exports = {
   name: 'purge',
   description: 'purges a number of messages, max 100',
+  mod: true,
   execute: async (message, args) => {
     if (isAuthorized(message)) {
       try {

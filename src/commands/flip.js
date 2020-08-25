@@ -7,7 +7,8 @@ const getRandomInt = (max) => {
 // @access      all
 module.exports = {
   name: 'flip',
-  description: 'Flips a set amount of clothes.',
+  description: 'Flips a set amount of coins.',
+  mod: false,
   execute: (message, args) => {
     const coins = parseInt(args[0]);
     if (coins >= 1967) {

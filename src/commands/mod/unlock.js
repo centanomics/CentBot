@@ -1,4 +1,4 @@
-const isAuthorized = require('../../utils/modAuth');
+const { isAuthorized } = require('../../utils/modAuth');
 
 // @command     unlock
 // @desc        undo a readonly channel
@@ -6,6 +6,7 @@ const isAuthorized = require('../../utils/modAuth');
 module.exports = {
   name: 'unlock',
   description: 'undo a readonly channel',
+  mod: true,
   execute: (message, args) => {
     if (isAuthorized(message)) {
       let everyoneRole = message.guild.roles.everyone.id;

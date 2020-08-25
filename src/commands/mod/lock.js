@@ -1,4 +1,4 @@
-const isAuthorized = require('../../utils/modAuth');
+const { isAuthorized } = require('../../utils/modAuth');
 
 // @command     lock
 // @desc        make a channel read only
@@ -6,6 +6,7 @@ const isAuthorized = require('../../utils/modAuth');
 module.exports = {
   name: 'lock',
   description: 'make a channel read only',
+  mod: true,
   execute: async (message, args) => {
     if (isAuthorized(message)) {
       let everyoneRole = message.guild.roles.everyone.id;

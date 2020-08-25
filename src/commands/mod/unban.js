@@ -1,4 +1,4 @@
-const isAuthorized = require('../../utils/modAuth');
+const { isAuthorized } = require('../../utils/modAuth');
 
 // @command     unban
 // @desc        unbans a user
@@ -6,6 +6,7 @@ const isAuthorized = require('../../utils/modAuth');
 module.exports = {
   name: 'unban',
   description: 'revokes a users ban',
+  mod: true,
   execute: async (message, args) => {
     if (isAuthorized(message)) {
       await message.guild.members.unban(args[0]);

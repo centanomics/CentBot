@@ -155,6 +155,7 @@ const removeQuotes = (args) => {
 module.exports = {
   name: 'bets',
   description: 'manage bets',
+  mod: false,
   execute: (message, args) => {
     let moreArgs = args
       .slice(1)

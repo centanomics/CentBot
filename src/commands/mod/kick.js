@@ -1,4 +1,4 @@
-const isAuthorized = require('../../utils/modAuth');
+const { isAuthorized } = require('../../utils/modAuth');
 
 // @command     kick
 // @desc        kicks a user
@@ -6,6 +6,7 @@ const isAuthorized = require('../../utils/modAuth');
 module.exports = {
   name: 'kick',
   description: 'Kicks a user',
+  mod: true,
   execute: async (message, args) => {
     if (isAuthorized(message)) {
       const user = message.mentions.users.first();
