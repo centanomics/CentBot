@@ -10,7 +10,7 @@ module.exports = {
   mod: false,
   execute: async (message, args) => {
     const isMod = isAuthorized(message, false);
-    let helpCommands = new Discord.MessageEmbed().setTitle('List of Commands');
+    let helpCommands = new Discord.MessageEmbed().setTitle('Penny Help');
     message.client.commands
       .filter((command) => {
         return !isMod ? command.mod === false : command;
