@@ -1,4 +1,5 @@
 const { toDE, toEN } = require('../../utils/translator');
+const { checkLength } = require('../../utils/chars');
 const prefix = process.env.PREFIX;
 
 module.exports = (client, message) => {
@@ -7,9 +8,11 @@ module.exports = (client, message) => {
     //english
     if (message.channel.id === '521497382572130304') {
       toDE(message);
+      checkLength(message);
       //german
     } else if (message.channel.id === '748757584005038201') {
       toEN(message);
+      checkLength(message);
     }
     return;
   }
