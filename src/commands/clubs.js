@@ -12,13 +12,10 @@ module.exports = {
         message.channel.send('create');
         return;
       case 'join':
-        message.channel.send('join');
+        message.channel.send('show');
         return;
       case 'leave':
         message.channel.send('delete');
-        return;
-      case 'delete':
-        message.channel.send('leave');
         return;
     }
   },
