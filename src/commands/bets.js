@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const uuid = require('uuid');
 
 const Bets = require('../models/bets');
-const e = require('express');
 
 const createBetEmbed = async (client, args) => {
   let rtnString = '';
