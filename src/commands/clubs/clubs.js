@@ -8,7 +8,9 @@ const createClub = async (message, args) => {
     const testClub = await Clubs.find({ name: args });
     if (testClub.length !== 0) throw { message: 'This club already exists!' };
 
-    const newRole = await message.guild.roles.create({ data: { name: args } });
+    const newRole = await message.guild.roles.create({
+      data: { name: args, mentionable: true },
+    });
 
     let newClub = new Clubs({
       name: args,
