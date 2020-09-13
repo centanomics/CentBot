@@ -41,7 +41,22 @@ const showClubs = async (message) => {
   }
 };
 
-const deleteClub = () => {};
+const deleteClub = async (message, args) => {
+  try {
+    const clubToDelete = await Clubs.find({ name: args });
+    if (clubToDelete.length === 0)
+      throw { message: "You can't delete a nonexistent club!" };
+
+    const toDelete = await message.guild.roles.fetch(clubToDelete[0].roleId);
+    await toDelete.delete();
+    // console.log(clubToDelete[0].roleId, toDelete.id);
+    await Clubs.findOneAndRemove(clubToDelete._id);
+    message.channel.send(`${args} club deleted`);
+  } catch (err) {
+    console.log(err.message);
+    message.channel.send(err.message);
+  }
+};
 
 // @command     clubs
 // @desc        manages clubs for tags and stuff
@@ -58,8 +73,8 @@ module.exports = {
       case 'show':
         showClubs(message);
         return;
-      case 'leave':
-        message.channel.send('delete');
+      case 'delete':
+        deleteClub(message, args.slice(1).join(''));
         return;
       default:
         message.channel.send('wrong keyword idiot');
