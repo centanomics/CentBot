@@ -1,3 +1,5 @@
+const Clubs = require('../../models/clubs');
+
 // @command     leaveclub
 // @desc        leave a club
 // @access      all
@@ -5,7 +7,7 @@ module.exports = {
   name: 'leaveclub',
   description: 'leave a club',
   mod: false,
-  execute: (message, args) => {
+  execute: async (message, args) => {
     try {
       const club = await Clubs.find({ name: args[0] });
       if (club.length === 0)
