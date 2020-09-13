@@ -4,7 +4,7 @@ const uuidv4 = require('uuid').v4();
 const ClubsSchema = mongoose.Schema({
   _id: {
     type: String,
-    default: uuidV4,
+    default: uuidv4,
     required: true,
   },
   name: {
