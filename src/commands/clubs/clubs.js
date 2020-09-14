@@ -79,7 +79,7 @@ module.exports = {
         deleteClub(message, args.slice(1).join(''));
         return;
       default:
-        message.channel.send('wrong keyword idiot');
+        message.channel.send('try show delete or create');
         return;
     }
   },
