@@ -1,5 +1,6 @@
 const { toDE, toEN } = require('../../utils/translator');
 const { checkLength } = require('../../utils/chars');
+const { isAuthorized } = require('../../utils/modAuth');
 const prefix = process.env.PREFIX;
 
 module.exports = (client, message) => {
@@ -22,7 +23,13 @@ module.exports = (client, message) => {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
   if (client.commands.get(command)) {
-    client.commands.get(command).execute(message, args);
+    if (client.commands.get(command).mod) {
+      if (isAuthorized(message, true)) {
+        client.commands.get(command).execute(message, args);
+      }
+    } else {
+      client.commands.get(command).execute(message, args);
+    }
   } else {
     // if the command doesn't exist, notify the user
     message.channel.send(`${command} command does not exist`);
