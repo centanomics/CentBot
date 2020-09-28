@@ -13,6 +13,7 @@ app.listen(port, () =>
 );
 
 /* START BOT CODE */
+//reminder to self to add more comments
 
 //setups .env files with tokens and gets startup for database
 require('dotenv').config();

@@ -37,6 +37,7 @@ const createBet = async (message, args) => {
       correct: '',
       userId: message.author.id,
       messageId: betMessageId,
+      guildId: message.guild.id,
     });
 
     const upInvite = await newBet.save();
@@ -50,6 +51,7 @@ const showBets = async (message, args) => {
   try {
     const createdBets = await Bets.find({
       userId: message.author.id,
+      guildId: message.guild.id,
     });
     if (createdBets.length === 0) {
       message.channel.send("You haven't created any bets yet!");
@@ -69,6 +71,7 @@ const closeBet = async (message, args) => {
   try {
     const createdBets = await Bets.find({
       userId: message.author.id,
+      guildId: message.guild.id,
     });
     let betToClose = createdBets[parseInt(args[0]) - 1];
     if (createdBets.length === 0) {
@@ -107,6 +110,7 @@ const deleteBet = async (message, args) => {
   try {
     const createdBets = await Bets.find({
       userId: message.author.id,
+      guildId: message.guild.id,
     });
     if (createdBets.length === 0) {
       message.channel.send("You haven't created any bets to delete!");
