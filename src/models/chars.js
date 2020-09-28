@@ -9,10 +9,6 @@ const charSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  guildId: {
-    type: String,
-    required: true,
-  },
 });
 
 module.exports = mongoose.model('chars', charSchema);
