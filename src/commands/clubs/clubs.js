@@ -1,11 +1,15 @@
 const Clubs = require('../../models/clubs');
 
+// creates a club and a corresponding role for the server
 const createClub = async (message, args) => {
   try {
     if (args.indexOf(' ') !== -1)
       throw { message: 'Your club cannot have a space in it' };
 
-    const testClub = await Clubs.find({ name: args });
+    const testClub = await Clubs.find({
+      name: args,
+      guildId: message.guild.id,
+    });
     if (testClub.length !== 0) throw { message: 'This club already exists!' };
 
     const newRole = await message.guild.roles.create({
@@ -15,6 +19,7 @@ const createClub = async (message, args) => {
     let newClub = new Clubs({
       name: args,
       roleId: newRole.id,
+      guildId: message.guild.id,
     });
 
     await newClub.save();
@@ -25,9 +30,10 @@ const createClub = async (message, args) => {
   }
 };
 
+// shows all of the clubs a server has
 const showClubs = async (message) => {
   try {
-    const clubs = await Clubs.find();
+    const clubs = await Clubs.find({ guildId: message.guild.id });
 
     if (clubs.length === 0)
       throw { message: 'There are no clubs for this server' };
@@ -43,16 +49,20 @@ const showClubs = async (message) => {
   }
 };
 
+// Deletes a club
 const deleteClub = async (message, args) => {
   try {
-    const clubToDelete = await Clubs.find({ name: args });
+    const clubToDelete = await Clubs.find({
+      name: args,
+      guildId: message.guild.id,
+    });
     if (clubToDelete.length === 0)
       throw { message: "You can't delete a nonexistent club!" };
 
     const toDelete = await message.guild.roles.fetch(clubToDelete[0].roleId);
     await toDelete.delete();
-    // console.log(clubToDelete[0].roleId, toDelete.id);
-    await Clubs.findOneAndRemove(clubToDelete._id);
+
+    await Clubs.findOneAndRemove(clubToDelete[0]._id);
     message.channel.send(`${args} club deleted`);
   } catch (err) {
     console.log(err.message);
@@ -79,7 +89,7 @@ module.exports = {
         deleteClub(message, args.slice(1).join(''));
         return;
       default:
-        message.channel.send('try show delete or create');
+        showClubs(message);
         return;
     }
   },
