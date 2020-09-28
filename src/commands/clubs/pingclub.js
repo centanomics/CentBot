@@ -9,7 +9,10 @@ module.exports = {
   mod: false,
   execute: async (message, args) => {
     try {
-      const club = await Clubs.find({ name: args[0] });
+      const club = await Clubs.find({
+        name: args[0],
+        guildId: message.guild.id,
+      });
       if (club.length === 0)
         throw { message: "You can't ping a nonexistent club!" };
 

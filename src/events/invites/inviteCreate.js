@@ -9,6 +9,7 @@ module.exports = async (client, invite) => {
     const newInvite = new Invite({
       _id: code,
       uses: uses,
+      guildId: invite.channel.guild.id,
     });
 
     const upInvite = await newInvite.save();
