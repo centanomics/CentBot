@@ -2,7 +2,12 @@ const Discord = require('discord.js');
 const uuid = require('uuid');
 
 const Bets = require('../models/bets');
+const Channels = require('../models/channels');
 
+// so i dont have to keep copying and pasting the bet channel id
+let betChannel = null;
+
+// creates a message to be sent in the bets channel
 const createBetEmbed = async (client, args) => {
   let rtnString = '';
   rtnString += args[0];
@@ -13,8 +18,8 @@ const createBetEmbed = async (client, args) => {
   rtnString += '-----\n';
   rtnString += 'Bet Status: OPEN';
   const numberEmotes = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣'];
-  const channel = await client.channels.fetch('619701986614312961');
-  const betMessage = await channel.send(rtnString);
+  // const channel = await client.channels.fetch('619701986614312961');
+  const betMessage = await betChannel.send(rtnString);
   for (let i = 0; i < args.length - 1; i++) {
     await betMessage.react(numberEmotes[i]);
   }
@@ -81,9 +86,9 @@ const closeBet = async (message, args) => {
       message.channel.send("You can't close a bet that's already closed!");
       return;
     }
-    const channel = await message.client.channels.fetch('619701986614312961');
+    // const channel = await message.client.channels.fetch('619701986614312961');
 
-    const messageToEdit = await channel.messages.fetch(betToClose.messageId);
+    const messageToEdit = await betChannel.messages.fetch(betToClose.messageId);
     const options = betToClose.options.split(',');
     let msgContent = messageToEdit.content.split('\n');
     msgContent[msgContent.length - 1] = `Bet Status: CLOSED | Correct Option: ${
@@ -117,8 +122,10 @@ const deleteBet = async (message, args) => {
       return;
     }
     const betToDelete = createdBets[parseInt(args) - 1];
-    const channel = await message.client.channels.fetch('619701986614312961');
-    const messageToDelete = await channel.messages.fetch(betToDelete.messageId);
+    // const channel = await message.client.channels.fetch('619701986614312961');
+    const messageToDelete = await betChannel.messages.fetch(
+      betToDelete.messageId
+    );
     await messageToDelete.delete();
     await Bets.findByIdAndRemove(betToDelete._id);
     message.channel.send('Bet deleted!');
@@ -159,13 +166,47 @@ module.exports = {
   name: 'bets',
   description: 'manage bets',
   mod: false,
-  execute: (message, args) => {
+  execute: async (message, args) => {
+    // checks to see if a bets channel exist for this server
+    // and sets it to the global betChannel variable
+    // if one doesn't, it creates one
+    const betsChannels = await Channels.find({
+      name: 'bets',
+      guildId: message.guild.id,
+    });
+
+    if (betsChannels.length === 0) {
+      const newChannel = await message.guild.channels.create('bets', {
+        type: 'text',
+        topic: 'Your bets will appear here!',
+        parent: '482717269474934794',
+        permissionOverwrites: [
+          { id: process.env.EVERYONE_ID, deny: ['SEND_MESSAGES'] },
+          { id: process.env.MOD_ID, allow: ['SEND_MESSAGES'] },
+        ],
+      });
+
+      const newBetChannel = new Channels({
+        name: newChannel.name,
+        channelId: newChannel.id,
+        guildId: newChannel.guild.id,
+      });
+      await newBetChannel.save();
+
+      betChannel = newChannel;
+    } else {
+      betChannel = message.guild.channels.resolve(betsChannels[0].channelId);
+    }
+
+    // changes smart double quotes to regular double quotes
+    // and then removes them for each argument
     let moreArgs = args
       .slice(1)
       .join(' ')
       .replace(/([“”])/g, '"')
       .split('" "');
     moreArgs = removeQuotes(moreArgs);
+
     switch (args[0]) {
       case 'create':
         createBet(message, moreArgs);
