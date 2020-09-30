@@ -1,12 +1,12 @@
 const Invite = require('../../models/invites');
+const { sendLog } = require('../../utils/modAuth');
 
 module.exports = async (client, invite) => {
-  const { code } = invite;
-  const channel = await client.channels.fetch('731129813095546982');
+  const { code, guild } = invite;
   try {
     await Invite.findByIdAndRemove(code);
   } catch (err) {
     console.log(err.message);
   }
-  channel.send(`invite tag \`${code}\` deleted`);
+  sendLog(`invite tag \`${code}\` deleted`, guild);
 };

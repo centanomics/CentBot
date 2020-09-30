@@ -12,6 +12,8 @@ module.exports = {
 
     if (message.author.equals(user)) {
       message.channel.send("You can't ban yourself!");
+    } else if (member.hasPermission('ADMINISTRATOR')) {
+      message.channel.send("That user has mod/admin, you can't ban them");
     } else if (member) {
       try {
         await member.ban(reason);

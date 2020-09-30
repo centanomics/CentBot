@@ -179,10 +179,9 @@ module.exports = {
       const newChannel = await message.guild.channels.create('bets', {
         type: 'text',
         topic: 'Your bets will appear here!',
-        parent: '482717269474934794',
+        position: 1000,
         permissionOverwrites: [
-          { id: process.env.EVERYONE_ID, deny: ['SEND_MESSAGES'] },
-          { id: process.env.MOD_ID, allow: ['SEND_MESSAGES'] },
+          { id: message.guild.roles.everyone.id, deny: ['SEND_MESSAGES'] },
         ],
       });
 
