@@ -2,7 +2,6 @@ const Invite = require('../../models/invites');
 const { sendLog } = require('../../utils/modAuth');
 
 module.exports = async (client, member) => {
-  const welcome = await client.channels.fetch('482722726373752832');
   const invitesArr = await member.guild.fetchInvites();
   const newInvites = Array.from(invitesArr.values());
   let code = '';
@@ -29,7 +28,7 @@ module.exports = async (client, member) => {
     member.guild
   );
 
-  welcome.send(
+  member.guild.systemChannel.send(
     `<@${member.user.id}> has been added to the collection. Welcome!`
   );
 };
