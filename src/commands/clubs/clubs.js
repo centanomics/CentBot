@@ -1,4 +1,5 @@
 const Clubs = require('../../models/clubs');
+const uuid = require('uuid');
 
 // creates a club and a corresponding role for the server
 const createClub = async (message, args) => {
@@ -17,6 +18,7 @@ const createClub = async (message, args) => {
     });
 
     let newClub = new Clubs({
+      _id: uuid.v4(),
       name: args,
       roleId: newRole.id,
       guildId: message.guild.id,
