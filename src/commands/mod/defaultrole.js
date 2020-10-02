@@ -24,6 +24,7 @@ module.exports = {
       message.channel.send(
         `${args[0]} set as the default role for this server`
       );
+      console.log(role.name);
 
       if (defaultRole) {
         await defaultRole.remove();

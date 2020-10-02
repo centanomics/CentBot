@@ -7,7 +7,7 @@ module.exports = async (client, member) => {
   const newInvites = Array.from(invitesArr.values());
   let code = '';
   try {
-    const oldInvites = await Invite.find({});
+    const oldInvites = await Invite.find({ guildId: member.guild.id });
     for (let i = 0; i < oldInvites.length; i++) {
       if (oldInvites[i].uses !== newInvites[i].uses) {
         code = oldInvites[i]._id;
@@ -22,7 +22,7 @@ module.exports = async (client, member) => {
       }
     }
   } catch (err) {
-    console.log(err.message);
+    console.log('invite find error:', err);
   }
   sendLog(
     `\`@${member.user.tag}\` joined server with invite \`${code}\``,
@@ -36,9 +36,9 @@ module.exports = async (client, member) => {
   try {
     const defaultRole = await Defaults.findOne({ guildId: member.guild.id });
     if (defaultRole) {
-      await member.roles.add(defaultRole.roleId);
+      await member.roles.set([defaultRole.roleId]);
     }
   } catch (err) {
-    console.log(err.message);
+    console.log('role add error:', err);
   }
 };
