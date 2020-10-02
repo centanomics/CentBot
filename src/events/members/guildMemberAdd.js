@@ -1,4 +1,5 @@
 const Invite = require('../../models/invites');
+const Defaults = require('../../models/defaults');
 const { sendLog } = require('../../utils/modAuth');
 
 module.exports = async (client, member) => {
@@ -31,4 +32,13 @@ module.exports = async (client, member) => {
   member.guild.systemChannel.send(
     `<@${member.user.id}> has been added to the collection. Welcome!`
   );
+
+  try {
+    const defaultRole = await Defaults.findOne({ guildId: member.guild.id });
+    if (defaultRole) {
+      await member.roles.add(defaultRole.roleId);
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
 };
