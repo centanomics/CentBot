@@ -1,18 +1,18 @@
 const Discord = require('discord.js');
 
-// @command     help
-// @desc        shows commands that you can use
-// @access      all
+// @command     modhelp
+// @desc        shows mod commands to mods
+// @access      mod
 module.exports = {
-  name: 'help',
-  description: 'Shows a list of commands',
-  mod: false,
+  name: 'modhelp',
+  description: 'This makes the bot reply pong!',
+  mod: true,
   execute: async (message, args) => {
-    let helpCommands = new Discord.MessageEmbed().setTitle('Penny Help');
+    let helpCommands = new Discord.MessageEmbed().setTitle('Penny Mod Help');
     message.client.commands
       .filter((command) => {
         // return !isMod ? command.mod === false : command;
-        return !command.mod ? command : null;
+        return command.mod ? command : null;
       })
       .map((command) => {
         const commandName =
