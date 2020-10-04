@@ -25,17 +25,17 @@ module.exports = {
         throw { message: rtnString };
       }
 
-      //checks to see if a user is already in a club
-      // message.member.roles.cache.map(async (role) => {
-      //   try {
-      //     const cloob = await Clubs.findOne({ roleId: role.id });
-      //     if (cloob) {
-      //       throw { message: 'You are already in this club!' };
-      //     }
-      //   } catch (err) {
-      //     throw { message: err.message };
-      //   }
-      // });
+      // checks to see if a user is already in a club
+      message.member.roles.cache.map(async (role) => {
+        try {
+          const cloob = await Clubs.findOne({ roleId: role.id });
+          if (cloob) {
+            throw { message: 'You are already in this club!' };
+          }
+        } catch (err) {
+          throw { message: err.message };
+        }
+      });
 
       message.member.roles.add(club[0].roleId);
       message.channel.send(`You joined the ${club[0].name} club`);
