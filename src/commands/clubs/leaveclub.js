@@ -14,7 +14,7 @@ module.exports = {
         guildId: message.guild.id,
       });
       if (club.length === 0)
-        throw { message: "You can't leave a nonexistent club!" };
+        throw { message: "You can't leave a club you're not in" };
 
       message.member.roles.remove(club[0].roleId);
       message.channel.send(`You left the ${club[0].name} club`);
