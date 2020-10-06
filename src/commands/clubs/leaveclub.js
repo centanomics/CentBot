@@ -9,15 +9,45 @@ module.exports = {
   mod: false,
   execute: async (message, args) => {
     try {
-      const club = await Clubs.find({
+      // gets the club user wants to leave
+      const club = await Clubs.findOne({
         name: args[0],
         guildId: message.guild.id,
       });
-      if (club.length === 0)
-        throw { message: "You can't leave a club you're not in" };
 
-      message.member.roles.remove(club[0].roleId);
-      message.channel.send(`You left the ${club[0].name} club`);
+      const guildClubs = await Clubs.find({ guildId: message.guild.id });
+      const userClubs = Array.from(message.member.roles.cache.keys());
+
+      // if the club doesnt exist, shows the user the list of clubs they are in
+      if (!club) {
+        let rtnString = 'List of clubs you can leave:\n';
+        for (let i = 0; i < userClubs.length; i++) {
+          if (
+            guildClubs.findIndex(
+              (guildClub) => guildClub.roleId === userClubs[i]
+            ) !== -1
+          ) {
+            const clubsToLeave = guildClubs.filter(
+              (guildClub) => guildClub.roleId === userClubs[i]
+            );
+            rtnString += `- ${clubsToLeave[0].name}\n`;
+          }
+        }
+        if (rtnString === 'List of clubs you can leave:\n') {
+          throw { message: "You aren't in any clubs!" };
+        } else {
+          throw { message: rtnString };
+        }
+      }
+
+      // checks if user is in club. If they are, they leave it.
+      // if they arent it tells them they arent in that club
+      if (userClubs.findIndex((userClub) => userClub === club.roleId) !== -1) {
+        message.member.roles.remove(club.roleId);
+        message.channel.send(`You left the ${club.name} club`);
+      } else {
+        throw { message: "You aren't in this club!" };
+      }
     } catch (err) {
       console.log(err.message);
       message.channel.send(err.message);

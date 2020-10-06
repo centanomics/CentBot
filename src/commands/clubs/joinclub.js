@@ -14,13 +14,12 @@ module.exports = {
         name: args[0],
         guildId: message.guild.id,
       });
-      console.log(club.roleId);
       //shows user list of clubs in the server if they don't enter a valid club name
       if (!club) {
         const clubs = await Clubs.find({ guildId: message.guild.id });
         let rtnString = 'List of clubs you can join:\n';
         for (let i = 0; i < clubs.length; i++) {
-          rtnString += `${i + 1}. ${clubs[i].name}\n`;
+          rtnString += `- ${clubs[i].name}\n`;
         }
         throw { message: rtnString };
       }
