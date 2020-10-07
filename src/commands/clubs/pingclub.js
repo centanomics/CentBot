@@ -1,7 +1,7 @@
 const Clubs = require('../../models/clubs');
 
 // @command     pingclub
-// @desc        pings a club
+// @desc        pings a club that they are in.
 // @access      all
 module.exports = {
   name: 'pingclub',
