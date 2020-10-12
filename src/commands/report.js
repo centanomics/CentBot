@@ -6,6 +6,7 @@ module.exports = {
   description: 'reports a comment',
   mod: false,
   execute: (message, args) => {
-    message.channel.send('pong!');
+    // just the report maker, user they are reporting, and broken rule
+    message.channel.send('');
   },
 };
