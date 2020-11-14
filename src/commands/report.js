@@ -7,6 +7,6 @@ module.exports = {
   mod: false,
   execute: (message, args) => {
     // just the report maker, user they are reporting, and broken rule
-    message.channel.send('');
+    message.channel.send('report');
   },
 };
