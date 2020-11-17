@@ -11,20 +11,24 @@ module.exports = {
   mod: false,
   execute: (message, args) => {
     const coins = parseInt(args[0]);
-    if (coins >= 1967) {
-      message.channel.send('You can only flip up to 1966 coins');
+    if (coins >= 1967 || coins < 1) {
+      message.channel.send('You can only flip between 1 and 1967 coins');
       return;
     }
     let results = '';
+    let counts = [0, 0]
     for (let i = 0; i < coins; i++) {
       const flip = getRandomInt(2);
       if (flip === 0) {
         results += 'H';
+        counts[0]++;
       } else if (flip === 1) {
         results += 'T';
+        counts[1]++;
       }
     }
 
     message.channel.send(`Results of the ${coins} coin flip(s): ${results}`);
+    message.channel.send(`Heads: ${counts[0]}\nTails: ${counts[1]}`);
   },
 };
