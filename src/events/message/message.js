@@ -1,23 +1,27 @@
+require('dotenv').config()
 const { toDE, toEN } = require('../../utils/translator');
 const { checkLength } = require('../../utils/chars');
 const { isAuthorized } = require('../../utils/modAuth');
-const prefix = process.env.PREFIX;
+const prefix = '$';
 
 module.exports = (client, message) => {
   // checks if the message had the prefix or from itself
-  if (!message.content.startsWith(prefix) && !message.author.bot) {
-    //english
-    if (message.channel.id === '521497382572130304') {
-      toDE(message);
-      checkLength(message);
-      //german
-    } else if (message.channel.id === '748757584005038201') {
-      toEN(message);
-      checkLength(message);
-    }
+  // if (!message.content.startsWith(prefix) && !message.author.bot) {
+  //   //english
+  //   if (message.channel.id === '521497382572130304') {
+  //     toDE(message);
+  //     checkLength(message);
+  //     //german
+  //   } else if (message.channel.id === '748757584005038201') {
+  //     toEN(message);
+  //     checkLength(message);
+  //   }
+  //   return;
+  // }
+  
+  if (!message.content.startsWith(prefix) || message.author.bot) {
     return;
-  }
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  };
 
   // gets the command file and runs the execute function
   const args = message.content.slice(prefix.length).split(/ +/);
