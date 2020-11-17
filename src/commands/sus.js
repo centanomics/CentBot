@@ -11,15 +11,36 @@ const showSusList = async (message) => {
       output += `${tiers[i]}: `;
       const thisTier = suses.filter(sus => sus.rating === tiers[i]);
       for (let j = 0; j < thisTier.length; j++) {
-        const member = message.guild.member(thisTier[j].userId);
+        const member = await message.guild.members.fetch(thisTier[j].userId);
         if (member.nickname === null) {
           output += `${member.user.username}, `;
         } else {
           output += `${member.nickname}, `;
         }
+        // output += `${member.nickname}, `;
       }
     }
+    
     message.channel.send(output);
+  } catch (err) {
+    console.log(err);
+    message.channel.send(err.message);
+  }
+}
+
+const removeSus = async (message, args) => {
+  try {
+    const user = message.mentions.members.first();
+    const susToDelete = await Sus.findOne({
+      guildId: message.guild.id,
+      userId: user.user.id,
+    })
+    if (!susToDelete) {
+      throw { message: "You can't remove a user not on the sus list" };
+    }
+
+    await Sus.findOneAndRemove(susToDelete._id);
+    message.channel.send(`Removed ${user.nickname} from sus list!`);
   } catch (err) {
     console.log(err.message);
     message.channel.send(err.message);
@@ -66,6 +87,9 @@ module.exports = {
     switch (args[0]) {
       case 'show':
         showSusList(message);
+        return;
+      case 'remove':
+        removeSus(message, args);
         return;
       default:
         addToSusList(message, args);
