@@ -39,7 +39,8 @@ const removeSus = async (message, args) => {
       throw { message: "You can't remove a user not on the sus list" };
     }
 
-    await Sus.findOneAndRemove(susToDelete._id);
+    susToDelete.remove();
+    // await Sus.findOneAndRemove(susToDelete._id);
     message.channel.send(`Removed ${user.nickname} from sus list!`);
   } catch (err) {
     console.log(err.message);
@@ -48,18 +49,12 @@ const removeSus = async (message, args) => {
 }
 
 const addToSusList = async (message, args) => {
-  console.log(args)
   try {
     if (tiers.indexOf(args[1].toUpperCase()) === -1) {
       throw {message: 'You need to enter a proper tier. (S, A, B, C, D, E, or F)'}
     }
 
     const user = message.mentions.members.first();
-    const susPerson = await Sus.findOne({guildId: message.guild.id, userId: user.user.id})
-    if (susPerson) {
-      throw { message: 'This idiot is already on this sus list!' }
-    }
-
     const newSus = new Sus({
       _id: uuidv4.v4(),
       guildId: message.guild.id,
@@ -67,11 +62,25 @@ const addToSusList = async (message, args) => {
       rating: args[1].toUpperCase(),
     });
 
+    let susPerson = await Sus.findOne({guildId: message.guild.id, userId: user.user.id})
+    if (susPerson) {
+      const susFields = {
+        rating: args[1].toUpperCase(),
+      }
+      susPerson = await Sus.findByIdAndUpdate(
+        susPerson._id,
+        { $set: susFields },
+        { new: true }
+      );
+      message.channel.send(`Updated ${user.nickname} to ${susFields.rating} tier!`);
+      return;
+    }
+
     await newSus.save();
     message.channel.send(`Added ${user.nickname} to ${newSus.rating} tier!`);
 
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
     message.channel.send(err.message);
   }
 }
