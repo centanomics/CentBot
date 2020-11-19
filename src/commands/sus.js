@@ -80,7 +80,7 @@ const addToSusList = async (message, args) => {
     message.channel.send(`Added ${user.nickname} to ${newSus.rating} tier!`);
 
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     message.channel.send(err.message);
   }
 }
