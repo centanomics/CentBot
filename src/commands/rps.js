@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+const Rps = require('../models/rps');
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 }
