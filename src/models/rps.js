@@ -14,12 +14,12 @@ const rpsSchema = mongoose.Schema({
     required: true,
   },
   userWin: {
-    type: String,
+    type: Number,
     required: true,
     default: 0,
   },
   botWin: {
-    type: String,
+    type: Number,
     required: true,
     default: 0,
   }
