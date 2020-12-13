@@ -6,18 +6,18 @@ const prefix = '$';
 
 module.exports = (client, message) => {
   // checks if the message had the prefix or from itself
-  // if (!message.content.startsWith(prefix) && !message.author.bot) {
-  //   //english
-  //   if (message.channel.id === '521497382572130304') {
-  //     toDE(message);
-  //     checkLength(message);
-  //     //german
-  //   } else if (message.channel.id === '748757584005038201') {
-  //     toEN(message);
-  //     checkLength(message);
-  //   }
-  //   return;
-  // }
+  if (!message.content.startsWith(prefix) && !message.author.bot) {
+    //english
+    if (message.channel.id === '521497382572130304') {
+      toDE(message);
+      // checkLength(message);
+      //german
+    } else if (message.channel.id === '748757584005038201') {
+      toEN(message);
+      // checkLength(message);
+    }
+    return;
+  }
   
   if (!message.content.startsWith(prefix) || message.author.bot) {
     return;
