@@ -1,6 +1,5 @@
 require('dotenv').config()
 const { toDE, toEN } = require('../../utils/translator');
-const { checkLength } = require('../../utils/chars');
 const { isAuthorized } = require('../../utils/modAuth');
 const prefix = '$';
 
