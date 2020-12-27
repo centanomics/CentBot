@@ -1,9 +1,7 @@
 const translate = require('@vitalets/google-translate-api');
 const Discord = require('discord.js');
-const message = require('../events/message/message');
 
 const translator = {
-  // checks if the user is a mod
   toDE: async (message) => {
     try {
       const channel = await message.client.channels.fetch('748757584005038201');
@@ -13,7 +11,7 @@ const translator = {
       msgEmbed.setDescription(reply.text);
       channel.send({ embed: msgEmbed });
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   },
   toEN: async (message) => {
@@ -25,7 +23,7 @@ const translator = {
       msgEmbed.setDescription(reply.text);
       channel.send({ embed: msgEmbed });
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   },
 };
