@@ -2,9 +2,10 @@ const translateAPI = require('@vitalets/google-translate-api');
 const {Translate} = require('@google-cloud/translate').v2;
 const Discord = require('discord.js');
 
-const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
+const CREDENTIALS = process.env.CREDENTIALS.replace(/\\n/gm, '\n');
+// CREDENTIALS.private_key.replace(/\\n/gm, '\n');
 const translate = new Translate({
-  credentials: CREDENTIALS,
+  credentials: JSON.parse(CREDENTIALS),
   projectId: CREDENTIALS.project_id,
 });
 
@@ -21,15 +22,16 @@ const translator = {
       // channel.send({ embed: msgEmbed });
       // console.log(CREDENTIALS.client_email)
       
-      let [translations] = await translate.translate(message.conent, 'de');
-      translations = Array.isArray(translations) ? translations : [translations];
-      console.log('Translations:');
-      translations.forEach((translation, i) => {
-        console.log(`${text[i]} => (${target}) ${translation}`);
-      });
+      let translations = await translate.translate(message.conent, 'de');
+      // translations = Array.isArray(translations) ? translations : [translations];
+      // console.log('Translations:');
+      // translations.forEach((translation, i) => {
+      //   console.log(`${text[i]} => (${target}) ${translation}`);
+      // });
+      console.log(translations)
 
     } catch (err) {
-      console.log(err);
+      console.log(err.message, CREDENTIALS);
       channel.send(err.message)
     }
   },
