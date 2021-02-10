@@ -2,7 +2,8 @@ const translateAPI = require('@vitalets/google-translate-api');
 const {Translate} = require('@google-cloud/translate').v2;
 const Discord = require('discord.js');
 
-const CREDENTIALS = require('../config/private_key');
+// const CREDENTIALS = require('../config/private_key');
+const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 // CREDENTIALS.private_key.replace(/\\n/gm, '\n');
 const translate = new Translate({
   credentials: CREDENTIALS,
@@ -12,6 +13,7 @@ const translate = new Translate({
 const translator = {
   toDE: async (message) => {
     const channel = await message.client.channels.fetch('748757584005038201');
+    console.log(JSON.stringify(CREDENTIALS));
     try {
       
       let [translations] = await translate.translate(message.content, 'de');
