@@ -13,14 +13,15 @@ const translate = new Translate({
 const translator = {
   toDE: async (message) => {
     const channel = await message.client.channels.fetch('748757584005038201');
-    console.log(JSON.stringify(CREDENTIALS));
     try {
-      
       let [translations] = await translate.translate(message.content, 'de');
 
       const msgEmbed = new Discord.MessageEmbed();
       msgEmbed.setAuthor(message.author.username, message.author.avatarURL());
       msgEmbed.setDescription(translations);
+      if ([...message.attachments].length !== 0) {
+        msgEmbed.attachFiles([...message.attachments][0][1].url);
+      }
       channel.send({ embed: msgEmbed });
 
     } catch (err) {
@@ -36,6 +37,9 @@ const translator = {
       const msgEmbed = new Discord.MessageEmbed();
       msgEmbed.setAuthor(message.author.username, message.author.avatarURL());
       msgEmbed.setDescription(translations);
+      if ([...message.attachments].length !== 0) {
+        msgEmbed.attachFiles([...message.attachments][0][1].url);
+      }
       channel.send({ embed: msgEmbed });
     } catch (err) {
       console.log(err.message);
