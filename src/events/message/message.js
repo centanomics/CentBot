@@ -6,6 +6,11 @@ const prefix = '$';
 module.exports = (client, message) => {
   // checks if the message had the prefix or from itself
   if (!message.content.startsWith(prefix) && !message.author.bot) {
+    // checks to see if message is a command
+    if (message.content.charAt(0) === '!' || message.content === 'b!birb') {
+      return
+    }
+
     //english
     if (message.channel.id === '521497382572130304') {
       toDE(message);
