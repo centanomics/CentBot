@@ -3,6 +3,8 @@ const { toDE, toEN } = require('../../utils/translator');
 const { isAuthorized } = require('../../utils/modAuth');
 const prefix = '$';
 
+const usedCommandRecently = new Set();
+
 module.exports = (client, message) => {
   // checks if the message had the prefix or from itself
   if (!message.content.startsWith(prefix) && !message.author.bot) {
@@ -29,12 +31,24 @@ module.exports = (client, message) => {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
   if (client.commands.get(command)) {
-    if (client.commands.get(command).mod) {
-      if (isAuthorized(message, true)) {
+    if (!usedCommandRecently.has(command + message.author.id)) {
+      if (client.commands.get(command).mod) {
+        if (isAuthorized(message, true)) {
+          client.commands.get(command).execute(message, args);
+          usedCommandRecently.add(command + message.author.id);
+          setTimeout(() => {
+            usedCommandRecently.delete(command + message.author.id)
+          }, client.commands.get(command).delay)
+        }
+      } else {
         client.commands.get(command).execute(message, args);
+        usedCommandRecently.add(command + message.author.id);
+        setTimeout(() => {
+          usedCommandRecently.delete(command + message.author.id)
+        }, client.commands.get(command).delay)
       }
     } else {
-      client.commands.get(command).execute(message, args);
+      message.channel.send('you gotta wait man')
     }
   } else {
     // if the command doesn't exist, notify the user
