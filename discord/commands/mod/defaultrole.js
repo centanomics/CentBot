@@ -6,6 +6,7 @@ const Defaults = require('../../models/defaults');
 module.exports = {
   name: 'defaultrole',
   description: 'sets a default role for the server',
+  delay: 0,
   mod: true,
   execute: async (message, args) => {
     try {

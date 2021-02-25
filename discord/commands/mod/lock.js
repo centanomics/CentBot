@@ -4,6 +4,7 @@
 module.exports = {
   name: 'lock',
   description: 'make a channel read only',
+  delay: 0,
   mod: true,
   execute: async (message, args) => {
     let everyoneRole = message.guild.roles.everyone.id;

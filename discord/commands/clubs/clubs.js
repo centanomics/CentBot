@@ -78,6 +78,7 @@ const deleteClub = async (message, args) => {
 module.exports = {
   name: 'clubs',
   description: 'Manages clubs for tags and stuff',
+  delay: 0,
   mod: true,
   execute: (message, args) => {
     switch (args[0]) {

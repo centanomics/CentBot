@@ -4,6 +4,7 @@
 module.exports = {
   name: 'unmute',
   description: 'unmutes people',
+  delay: 0,
   mod: true,
   execute: (message, args) => {
     const user = message.mentions.members.first();

@@ -6,6 +6,7 @@ const Channels = require('../../models/channels');
 module.exports = {
   name: 'logs',
   description: 'toggles a log channel for this server',
+  delay: 0,
   mod: true,
   execute: async (message, args) => {
     const logChannel = await Channels.find({

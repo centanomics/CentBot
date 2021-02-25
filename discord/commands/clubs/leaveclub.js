@@ -6,6 +6,7 @@ const Clubs = require('../../models/clubs');
 module.exports = {
   name: 'leaveclub',
   description: 'leave a club',
+  delay: 0,
   mod: false,
   execute: async (message, args) => {
     try {

@@ -25,6 +25,7 @@ const getUser = async (guildId, userId) => {
 module.exports = {
   name: 'rps',
   description: 'rock paper scissors',
+  delay: 10000,
   mod: false,
   execute: async (message, args) => {
     const botChoice = options[getRandomInt(3) + 1];

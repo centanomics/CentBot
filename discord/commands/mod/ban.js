@@ -4,6 +4,7 @@
 module.exports = {
   name: 'ban',
   description: 'bans a user',
+  delay: 0,
   mod: true,
   execute: async (message, args) => {
     message.channel.send('disabled');

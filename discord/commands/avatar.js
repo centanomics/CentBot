@@ -4,6 +4,7 @@
 module.exports = {
   name: 'avatar',
   description: 'Gets your avatar',
+  delay: 0,
   mod: false,
   execute: (message, args) => {
     if (args.length === 0) {

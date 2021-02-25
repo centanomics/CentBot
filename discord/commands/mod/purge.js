@@ -4,6 +4,7 @@
 module.exports = {
   name: 'purge',
   description: 'purges a number of messages, max 100',
+  delay: 0,
   mod: true,
   execute: async (message, args) => {
     try {

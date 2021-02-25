@@ -91,6 +91,7 @@ const addToSusList = async (message, args) => {
 module.exports = {
   name: 'ping',
   description: 'sus tierlist stuff',
+  delay: 0,
   mod: false,
   execute: (message, args) => {
     switch (args[0]) {

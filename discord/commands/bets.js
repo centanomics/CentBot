@@ -165,6 +165,7 @@ const removeQuotes = (args) => {
 module.exports = {
   name: 'bets',
   description: 'manage bets',
+  delay: 0,
   mod: false,
   execute: async (message, args) => {
     // checks to see if a bets channel exist for this server

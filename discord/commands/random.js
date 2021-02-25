@@ -13,6 +13,7 @@ const removeQuotes = (args) => {
 module.exports = {
   name: 'random',
   description: 'chooses a random option',
+  delay: 0,
   mod: false,
   execute: (message, args) => {
     let moreArgs = args

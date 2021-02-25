@@ -4,6 +4,7 @@
 module.exports = {
   name: 'mute',
   description: 'mutes people',
+  delay: 0,
   mod: true,
   execute: async (message, args) => {
     const user = message.mentions.members.first();

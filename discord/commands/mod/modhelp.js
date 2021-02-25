@@ -6,6 +6,7 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'modhelp',
   description: 'This makes the bot reply pong!',
+  delay: 0,
   mod: true,
   execute: async (message, args) => {
     let helpCommands = new Discord.MessageEmbed().setTitle('Penny Mod Help');

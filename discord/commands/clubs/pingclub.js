@@ -6,6 +6,7 @@ const Clubs = require('../../models/clubs');
 module.exports = {
   name: 'pingclub',
   description: 'pings a club',
+  delay: 3600000,
   mod: false,
   execute: async (message, args) => {
     try {

@@ -8,6 +8,7 @@ const getRandomInt = (max) => {
 module.exports = {
   name: 'flip',
   description: 'Flips a set amount of coins.',
+  delay: 10000,
   mod: false,
   execute: (message, args) => {
     const coins = parseInt(args[0]);
