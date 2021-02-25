@@ -1,3 +1,4 @@
+// setups .env files with tokens
 require('dotenv').config()
 const express = require('express');
 const app = express();

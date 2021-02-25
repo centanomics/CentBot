@@ -1,8 +1,7 @@
 /* START BOT CODE */
 //reminder to self to add more comments
 
-//setups .env files with tokens and gets startup for database
-require('dotenv').config();
+// gets startup for database
 const Discord = require('discord.js');
 const connectDB = require('./config/db');
 
