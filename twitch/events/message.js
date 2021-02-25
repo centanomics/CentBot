@@ -2,7 +2,6 @@ const prefix = '$';
 
 module.exports = (client, channel, userstate, msg, self) => {
   if (self || !msg.startsWith(prefix)) return;
-  console.log(userstate);
 
   // gets the command file and runs the execute function
   const args = msg.slice(prefix.length).split(/ +/);
