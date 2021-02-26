@@ -13,13 +13,13 @@ module.exports = (client, message) => {
       return
     }
 
-    //english
-    if (message.channel.id === '521497382572130304') {
-      toDE(message);
-      //german
-    } else if (message.channel.id === '748757584005038201') {
-      toEN(message);
-    }
+    
+    // if (message.channel.id === '521497382572130304') {
+    //   toDE(message);
+      
+    // } else if (message.channel.id === '748757584005038201') {
+    //   toEN(message);
+    // }
     return;
   }
   
