@@ -16,4 +16,4 @@ app.listen(port, () =>
 
 // add bots
 require('./discord/discordBot');
-require('./twitch/twitchBot');
+// require('./twitch/twitchBot');

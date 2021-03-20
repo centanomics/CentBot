@@ -7,8 +7,8 @@ module.exports = {
   delay: 10,
   mod: false,
   execute: (message, args) => {
-    setTimeout(() => {
+    setInterval(() => {
       message.channel.send(args.join(' '))
-    }, 43200000)
+    }, 3600000)
   },
 };
