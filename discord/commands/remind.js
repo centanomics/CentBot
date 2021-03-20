@@ -9,6 +9,6 @@ module.exports = {
   execute: (message, args) => {
     setTimeout(() => {
       message.channel.send(args.join(' '))
-    }, 5000)
+    }, 43200000)
   },
 };
