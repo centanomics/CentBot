@@ -10,16 +10,20 @@ module.exports = {
   mod: false,
   execute: async (message, args) => {
     let helpCommands = new Discord.MessageEmbed().setTitle('Penny Help');
-    message.client.commands
-      .filter((command) => {
-        // return !isMod ? command.mod === false : command;
-        return !command.mod ? command : null;
-      })
-      .map((command) => {
-        const commandName =
-          command.name[0].toUpperCase() + command.name.slice(1);
-        helpCommands.addField(`${commandName}:`, command.description);
-      });
+    // message.client.commands
+    //   .filter((command) => {
+    //     return !command.mod ? command : null;
+    //   })
+    //   .map((command) => {
+    //     const commandName =
+    //       command.name[0].toUpperCase() + command.name.slice(1);
+    //     helpCommands.addField(`${commandName}:`, command.description);
+    //   });
+
+    let commands = message.client.commands.filter((command) => {
+      return !command.mod ? command : null;
+    })
+    console.log(commands)
 
     message.channel.send({ embed: helpCommands });
   },

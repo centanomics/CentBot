@@ -89,7 +89,7 @@ const addToSusList = async (message, args) => {
 // @desc        sus tierlist stuff
 // @access      all
 module.exports = {
-  name: 'ping',
+  name: 'sus',
   description: 'sus tierlist stuff',
   delay: 0,
   mod: false,
