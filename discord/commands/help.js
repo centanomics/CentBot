@@ -23,7 +23,11 @@ module.exports = {
     let commands = message.client.commands.filter((command) => {
       return !command.mod ? command : null;
     })
-    console.log(commands)
+    commands.map((command) => {
+      const commandName =
+        command.name[0].toUpperCase() + command.name.slice(1);
+      helpCommands.addField(`${commandName}:`, command.description);
+    })
 
     message.channel.send({ embed: helpCommands });
   },
