@@ -28,7 +28,7 @@ module.exports = (client, message) => {
   };
 
   //catches messages with just dollar values in them
-  const regex = /([0-9])+\.([0-9])+/g;
+  const regex = /([0-9])+\.?([0-9])+/g;
   if (message.content.slice(prefix.length).match(regex) !== null) {
     return
   }
