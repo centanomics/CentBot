@@ -16,7 +16,6 @@ module.exports = {
       message.channel.send('Choose how many coins to flip.');
       return false;
     }
-    // console.log(coins, args);
     if (coins >= 1967 || coins < 1) {
       message.channel.send('You can only flip between 1 and 1967 coins');
       return false;

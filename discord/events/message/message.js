@@ -41,12 +41,10 @@ module.exports = async (client, message) => {
       if (client.commands.get(command).mod) {
         if (isAuthorized(message, true)) {
           const ver = await client.commands.get(command).execute(message, args);
-          //timeout
           delay(ver, command, message.author.id, client);
         }
       } else {
         const ver = await client.commands.get(command).execute(message, args);
-        //timeout
         delay(ver, command, message.author.id, client);
       }
     } else {
