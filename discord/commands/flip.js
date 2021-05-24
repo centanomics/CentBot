@@ -8,16 +8,21 @@ const getRandomInt = (max) => {
 module.exports = {
   name: 'flip',
   description: 'Flips a set amount of coins.',
-  delay: 10000,
+  delay: 5000,
   mod: false,
   execute: (message, args) => {
     const coins = parseInt(args[0]);
+    if (args.length === 0) {
+      message.channel.send('Choose how many coins to flip.');
+      return;
+    }
+    // console.log(coins, args);
     if (coins >= 1967 || coins < 1) {
       message.channel.send('You can only flip between 1 and 1967 coins');
       return;
     }
     let results = '';
-    let counts = [0, 0]
+    let counts = [0, 0];
     for (let i = 0; i < coins; i++) {
       const flip = getRandomInt(2);
       if (flip === 0) {
