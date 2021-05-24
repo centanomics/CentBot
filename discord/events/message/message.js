@@ -1,9 +1,17 @@
 require('dotenv').config();
-// const { toDE, toEN } = require('../../utils/translator');
 const { isAuthorized } = require('../../utils/modAuth');
 const prefix = '$';
 
 const usedCommandRecently = new Set();
+
+const delay = (wentThrough, command, authorId, client) => {
+  if (wentThrough) {
+    usedCommandRecently.add(command + authorId);
+    setTimeout(() => {
+      usedCommandRecently.delete(command + authorId);
+    }, client.commands.get(command).delay);
+  }
+};
 
 module.exports = async (client, message) => {
   // checks if the message had the prefix or from itself
@@ -12,13 +20,6 @@ module.exports = async (client, message) => {
     if (message.content.charAt(0) === '!' || message.content === 'b!birb') {
       return;
     }
-
-    // if (message.channel.id === '521497382572130304') {
-    //   toDE(message);
-
-    // } else if (message.channel.id === '748757584005038201') {
-    //   toEN(message);
-    // }
     return;
   }
 
@@ -41,22 +42,12 @@ module.exports = async (client, message) => {
         if (isAuthorized(message, true)) {
           const ver = await client.commands.get(command).execute(message, args);
           //timeout
-          if (ver) {
-            usedCommandRecently.add(command + message.author.id);
-            setTimeout(() => {
-              usedCommandRecently.delete(command + message.author.id);
-            }, client.commands.get(command).delay);
-          }
+          delay(ver, command, message.author.id, client);
         }
       } else {
         const ver = await client.commands.get(command).execute(message, args);
         //timeout
-        if (ver) {
-          usedCommandRecently.add(command + message.author.id);
-          setTimeout(() => {
-            usedCommandRecently.delete(command + message.author.id);
-          }, client.commands.get(command).delay);
-        }
+        delay(ver, command, message.author.id, client);
       }
     } else {
       message.channel.send('you gotta wait man');
