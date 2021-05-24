@@ -50,7 +50,11 @@ module.exports = async (client, message) => {
         delay(ver, command, message.author.id, client);
       }
     } else {
-      message.channel.send('you gotta wait man');
+      message.channel.send(
+        `You have to wait ${
+          client.commands.get(command).delay * 0.001
+        } seconds from the last use of this command to use it again.`
+      );
     }
   } else {
     // if the command doesn't exist, notify the user
