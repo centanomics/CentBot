@@ -14,12 +14,12 @@ module.exports = {
     const coins = parseInt(args[0]);
     if (args.length === 0) {
       message.channel.send('Choose how many coins to flip.');
-      return;
+      return false;
     }
     // console.log(coins, args);
     if (coins >= 1967 || coins < 1) {
       message.channel.send('You can only flip between 1 and 1967 coins');
-      return;
+      return false;
     }
     let results = '';
     let counts = [0, 0];
@@ -36,5 +36,6 @@ module.exports = {
 
     message.channel.send(`Results of the ${coins} coin flip(s): ${results}`);
     message.channel.send(`Heads: ${counts[0]}\nTails: ${counts[1]}`);
+    return true;
   },
 };
