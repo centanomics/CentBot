@@ -5,7 +5,18 @@
 const Discord = require('discord.js');
 const connectDB = require('./config/db');
 
-const client = new Discord.Client();
+const intents = [
+  'GUILDS',
+  'GUILD_MEMBERS',
+  'GUILD_BANS',
+  'GUILD_INVITES',
+  'GUILD_MESSAGES',
+  'GUILD_MESSAGE_REACTIONS',
+];
+const client = new Discord.Client({
+  intents: intents,
+  ws: { intents: intents },
+});
 
 // connects to database
 connectDB();
