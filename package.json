@@ -10,19 +10,17 @@
   },
   "author": "Centanomics",
   "license": "ISC",
+  "repository": "https://github.com/centanomics/Penny",
   "dependencies": {
-    "@google-cloud/translate": "^6.0.5",
-    "@vitalets/google-translate-api": "^4.0.0",
     "axios": "^0.21.1",
-    "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.21",
-    "tmi.js": "^1.7.1",
-    "uuid": "^8.2.0"
+    "mongoose": "^5.12.14",
+    "tmi.js": "^1.8.3",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
-  },
-  "repository": "https://github.com/centanomics/Penny"
+    "nodemon": "^2.0.7"
+  }
 }
