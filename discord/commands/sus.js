@@ -51,6 +51,19 @@ const removeSus = async (message, args) => {
 
 const addToSusList = async (message, args) => {
   try {
+    if (args.length === 0) {
+      const susHelper = new Discord.MessageEmbed();
+      susHelper.setTitle('Random Help.');
+      susHelper.addField(
+        '$sus [@user] [S-F rating]',
+        "Adds a user to the sus list if they're not on it, updated their rating if the user is on the list already"
+      );
+      susHelper.addField('$sus show', 'Shows the sus list.');
+      susHelper.addField('$sus remove', 'Removes a user from the sus list');
+      message.channel.send({ embed: susHelper });
+      return;
+    }
+
     if (tiers.indexOf(args[1].toUpperCase()) === -1) {
       throw {
         message: 'You need to enter a proper tier. (S, A, B, C, D, E, or F)',
@@ -101,6 +114,7 @@ module.exports = {
   delay: 0,
   mod: false,
   execute: (message, args) => {
+    console.log(args);
     switch (args[0]) {
       case 'show':
         showSusList(message);
@@ -109,20 +123,7 @@ module.exports = {
         removeSus(message, args);
         return;
       default:
-        if (args.length === 0) {
-          const susHelper = new Discord.MessageEmbed();
-          susHelper.setTitle('Random Help.');
-          susHelper.addField(
-            '$sus [@user] [S-F rating]',
-            "Adds a user to the sus list if they're not on it, updated their rating if the user is on the list already"
-          );
-          susHelper.addField('$sus show', 'Shows the sus list.');
-          susHelper.addField('$sus remove', 'Removes a user from the sus list');
-          message.channel.send({ embed: susHelper });
-        } else {
-          console.log('sus list goes through');
-          addToSusList(message, args);
-        }
+        addToSusList(message, args);
         return;
     }
   },
