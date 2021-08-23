@@ -79,6 +79,7 @@ const addToSusList = async (message, args) => {
       userId: user.user.id,
       rating: args[1].toUpperCase(),
     });
+    const name = user.nickname ? user.nickname : user.user.username;
 
     let susPerson = await Sus.findOne({
       guildId: message.guild.id,
@@ -93,14 +94,12 @@ const addToSusList = async (message, args) => {
         { $set: susFields },
         { new: true }
       );
-      message.channel.send(
-        `Updated ${user.nickname} to ${susFields.rating} tier!`
-      );
+      message.channel.send(`Updated ${name} to ${susFields.rating} tier!`);
       return;
     }
 
     await newSus.save();
-    message.channel.send(`Added ${user.nickname} to ${newSus.rating} tier!`);
+    message.channel.send(`Added ${name} to ${newSus.rating} tier!`);
   } catch (err) {
     console.log(err.message);
     message.channel.send(err.message);
@@ -116,7 +115,6 @@ module.exports = {
   delay: 0,
   mod: false,
   execute: (message, args) => {
-    console.log(args[0]);
     switch (args[0]) {
       case 'show':
         showSusList(message);
@@ -125,8 +123,7 @@ module.exports = {
         removeSus(message, args);
         return;
       default:
-        console.log(args);
-        // addToSusList(message, args);
+        addToSusList(message, args);
         return;
     }
   },
