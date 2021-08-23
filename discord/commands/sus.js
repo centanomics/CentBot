@@ -50,7 +50,9 @@ const removeSus = async (message, args) => {
 };
 
 const addToSusList = async (message, args) => {
+  console.log('hi');
   try {
+    // helper for when no arguments are put in
     if (args.length === 0) {
       const susHelper = new Discord.MessageEmbed();
       susHelper.setTitle('Random Help.');
@@ -64,6 +66,7 @@ const addToSusList = async (message, args) => {
       return;
     }
 
+    // checks to see if a valid rating was given
     if (tiers.indexOf(args[1].toUpperCase()) === -1) {
       throw {
         message: 'You need to enter a proper tier. (S, A, B, C, D, E, or F)',
@@ -114,7 +117,6 @@ module.exports = {
   delay: 0,
   mod: false,
   execute: (message, args) => {
-    console.log(args);
     switch (args[0]) {
       case 'show':
         showSusList(message);

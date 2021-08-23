@@ -1,5 +1,5 @@
 // setups .env files with tokens
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -16,4 +16,3 @@ app.listen(port, () =>
 
 // add bots
 require('./discord/discordBot');
-// require('./twitch/twitchBot');
