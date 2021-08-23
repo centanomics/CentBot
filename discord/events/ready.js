@@ -8,4 +8,6 @@ module.exports = async (client) => {
       type: 'PLAYING', //PLAYING: WATCHING: LISTENING: STREAMING:
     },
   });
+  console.log('No glob:\n', client.commands, client.events);
+  console.log('Glob:\n', client.globCommands, client.globEvents);
 };

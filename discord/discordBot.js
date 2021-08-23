@@ -3,6 +3,8 @@
 
 // gets startup for database
 const Discord = require('discord.js');
+const glob = require('glob');
+
 const connectDB = require('./config/db');
 
 const intents = [
@@ -27,6 +29,9 @@ const path = require('path');
 // creates a collection of commands and events
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
+
+client.globCommands = new Discord.Collection();
+client.globEvents = new Discord.Collection();
 
 // adds all commands to a collection
 (async function registerCommands(dir = 'commands') {
@@ -71,6 +76,10 @@ client.events = new Discord.Collection();
     }
   }
 })();
+
+glob('/discord/commands/**.js', (err, files) => {
+  console.log(files);
+});
 
 // login
 client.login(process.env.DISCORD_BOT_TOKEN);

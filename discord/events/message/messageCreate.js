@@ -27,12 +27,6 @@ module.exports = async (client, message) => {
     return;
   }
 
-  //catches messages with just dollar values in them
-  // const regex = /([0-9])+\.?([0-9])+/g;
-  // if (message.content.slice(prefix.length).match(regex) !== null) {
-  //   return;
-  // }
-
   // gets the command file and runs the execute function
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
