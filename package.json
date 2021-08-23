@@ -15,7 +15,7 @@
     "@google-cloud/translate": "^6.2.6",
     "@vitalets/google-translate-api": "^7.0.0",
     "axios": "^0.21.1",
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.12.14",

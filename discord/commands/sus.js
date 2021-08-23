@@ -50,7 +50,6 @@ const removeSus = async (message, args) => {
 };
 
 const addToSusList = async (message, args) => {
-  console.log('hi');
   try {
     // helper for when no arguments are put in
     if (args.length === 0) {
@@ -117,6 +116,7 @@ module.exports = {
   delay: 0,
   mod: false,
   execute: (message, args) => {
+    console.log(args[0]);
     switch (args[0]) {
       case 'show':
         showSusList(message);
@@ -125,7 +125,8 @@ module.exports = {
         removeSus(message, args);
         return;
       default:
-        addToSusList(message, args);
+        console.log(args);
+        // addToSusList(message, args);
         return;
     }
   },
