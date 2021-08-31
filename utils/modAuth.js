@@ -3,7 +3,7 @@ const Channels = require('../models/channels');
 const modAuth = {
   // checks if the user is a mod
   isAuthorized: (message, reply) => {
-    if (!message.member.hasPermission('ADMINISTRATOR')) {
+    if (!message.member.permissions.has('ADMINISTRATOR')) {
       reply
         ? message.reply("You don't have permission to use this command!")
         : null;
