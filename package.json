@@ -13,7 +13,7 @@
   "repository": "https://github.com/centanomics/Penny",
   "dependencies": {
     "@google-cloud/translate": "^6.2.6",
-    "@vitalets/google-translate-api": "^7.0.0",
+    "@vitalets/google-translate-api": "^9.1.0",
     "axios": "^0.21.1",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
@@ -24,6 +24,6 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.20"
   }
 }
